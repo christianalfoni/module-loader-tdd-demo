@@ -1,0 +1,11 @@
+{
+    "name": "module-loader-tdd-demo",
+    "dependencies": {
+        "grunt": "~0.4.2",
+        "recursive-readdir": "0.0.2",
+        "grunt-contrib-uglify": "~0.2.2",
+        "hbs": "~2.4.0",
+        "express": "~3.4.4",
+        "module-loader-tdd": "~0.1.7"
+    }
+}
