@@ -185,13 +185,12 @@
                 deps: {}
             };
             context.require = p.createTestRequireMethod(context, modules);
-            if (!isNode && p.Handlebars) {
-                context.requireTemplate = p.getTemplate;
-            } else if (!isNode) {
+            if (!isNode) {
                 context.requireTemplate = function () {
-                    p.throw('Unable to fetch template. Can not find Handlebars in the global scope, is it loaded?');
-                }
+                    return function () { return ''; }
+                } // Do not require any templates
             }
+
             return context;
         },
         createTestRequireMethod: function (context, modules) {
@@ -208,6 +207,7 @@
 
                 if (!isNode && p.Handlebars) {
                     depContext.requireTemplate = function () {
+                        return function () { return ''; }
                     } // Do not require any templates inside dependencies
                 }
 
@@ -225,12 +225,17 @@
             if (sinon) {
                 var stubbedMethods = {};
 
-                for (var depMethod in exports) {
-                    if (typeof exports[depMethod] === 'function') {
-                        stubbedMethods[depMethod] = exports[depMethod];
-                        sinon.stub(stubbedMethods, depMethod);
+                if (typeof exports === 'function') {
+                    return sinon.spy();
+                } else {
+                    for (var depMethod in exports) {
+                        if (typeof exports[depMethod] === 'function') {
+                            stubbedMethods[depMethod] = exports[depMethod];
+                            sinon.stub(stubbedMethods, depMethod);
+                        }
                     }
                 }
+
                 return stubbedMethods;
             }
             return exports;
