@@ -26,7 +26,6 @@ module.exports = function(grunt) {
                     sources: ['client/app/**/*.js'], // The source files of the project
                     libs: [
                         'client/vendors/jquery-1.10.2.js',
-                        'client/vendors/handlebars-v1.1.2.js',
                         'client/vendors/module-loader-tdd.js'
                     ] // Any libs to load first
                 },
@@ -35,15 +34,28 @@ module.exports = function(grunt) {
                     port: 3001 // Port to show tests, defaults to 3001
                 }
             }
+        },
+        buster: {
+            foo: {
+                test: {
+                    config: 'server/tests/Buster.js',
+                    reporter: 'specification'
+                },
+                server: {
+                    port: 1111
+                }
+            }
         }
     });
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-buster-tdd');
+    grunt.loadNpmTasks('grunt-buster');
 
     // Default task(s).
     grunt.registerTask('deploy', ['uglify']);
     grunt.registerTask('default', ['tdd:browser']);
+    grunt.registerTask('test', ['buster:foo']);
 
 };

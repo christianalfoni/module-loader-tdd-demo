@@ -14,6 +14,11 @@ modules.test('./../modules/moduleFinder', function (moduleFinder, p, deps) {
         },
         'check if path is a dependency': function () {
             assert.isObject(deps.path);
+        },
+        TESTS: {
+            'just testing': function () {
+                assert(true);
+            }
         }
     });
 

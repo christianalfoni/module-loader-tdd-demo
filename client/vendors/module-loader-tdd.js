@@ -187,7 +187,9 @@
             context.require = p.createTestRequireMethod(context, modules);
             if (!isNode) {
                 context.requireTemplate = function () {
-                    return function () { return ''; }
+                    return function () {
+                        return '';
+                    }
                 } // Do not require any templates
             }
 
@@ -195,19 +197,40 @@
         },
         createTestRequireMethod: function (context, modules) {
             return function (name) {
+                var depExceptions = [];
                 if (isNode) {
                     name = p.getModulePath(name);
                 }
                 var depModule = p.getModule(name, modules),
                     depContext = {
-                        require: function () {
-                        }, // Do not require any deeper dependencies
-                        privates: {}
+                        privates: {},
+                        require: function (name) { // TODO: Make this more general with registerModule
+
+                            if (isNode) {
+                                name = p.getModulePath(name);
+                            }
+                            var module = p.getModule(name, modules);
+
+                            try {
+                                module = module.func.apply(context, p.contextToArray(context));
+                            } catch (e) {
+                                if (e.message.match(/MODULE-LOADER/)) {
+                                    p.addDepException(depExceptions, e.message);
+                                } else {
+                                    throw e;
+                                }
+                            }
+
+                            return p.isModule(module) ? module.exports : module; // Return exports only if it is a module-loader module
+
+                        }
                     };
 
                 if (!isNode && p.Handlebars) {
                     depContext.requireTemplate = function () {
-                        return function () { return ''; }
+                        return function () {
+                            return '';
+                        }
                     } // Do not require any templates inside dependencies
                 }
 
