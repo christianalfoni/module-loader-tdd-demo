@@ -11,5 +11,5 @@ A demo for the module-loader-tdd project
 ### Normal
 Run: **node server** and a localhost:3000 willl be available
 
-###
+### Testing
 Have a look at [https://github.com/christianalfoni/grunt-tdd](https://github.com/christianalfoni/grunt-tdd)
