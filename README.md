@@ -5,7 +5,6 @@ A demo for the module-loader-tdd project
 
 ## Dependencies
 - Node JS
-- Buster JS: **npm install -g buster** (Then link it to this project with: **npm link buster**)
 
 ## How to run
 
