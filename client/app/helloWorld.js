@@ -1,6 +1,6 @@
-modules.create('helloWorld', function (require, p, requireTemplate) {
+modules.create('helloWorld', function (require, p) {
     var logger = require('logger'),
-        template = requireTemplate('message');
+        template = require.template('message');
 
     p.sayToWorld = function (say) {
         return say + ' world!';

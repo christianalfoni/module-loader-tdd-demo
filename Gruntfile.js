@@ -27,22 +27,13 @@ module.exports = function(grunt) {
                     libs: [
                         'client/vendors/jquery-1.10.2.js',
                         'client/vendors/module-loader-tdd.js'
-                    ] // Any libs to load first
+                    ], // Any libs to load first
+                    tests: ['client/tests/**/*-test.js']
                 },
                 options: {
-                    testsPath: 'client/tests/', // Where are your tests located?
-                    port: 3001 // Port to show tests, defaults to 3001
-                }
-            }
-        },
-        buster: {
-            foo: {
-                test: {
-                    config: 'server/tests/Buster.js',
-                    reporter: 'specification'
-                },
-                server: {
-                    port: 1111
+                    runner: 'buster',
+                    expect: true,
+                    sinon: true
                 }
             }
         }
@@ -50,12 +41,9 @@ module.exports = function(grunt) {
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-buster-tdd');
-    grunt.loadNpmTasks('grunt-buster');
+    grunt.loadNpmTasks('grunt-tdd');
 
     // Default task(s).
     grunt.registerTask('deploy', ['uglify']);
-    grunt.registerTask('default', ['tdd:browser']);
-    grunt.registerTask('test', ['buster:foo']);
 
 };
