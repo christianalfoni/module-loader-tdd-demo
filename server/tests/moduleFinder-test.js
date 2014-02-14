@@ -1,23 +1,18 @@
-require('module-loader-tdd');
-
-var buster = require('buster'),
-    assert = buster.assert;
-
 modules.test('./../modules/moduleFinder', function (moduleFinder, p, deps) {
 
-    buster.testCase('Just a test', {
+    module.exports = buster.testCase('Just a test', {
         'has findAll function': function () {
-            assert.isFunction(moduleFinder.findAll)
+            expect(moduleFinder.findAll).to.be.a('function');
         },
         'has an empty array': function () {
-            assert(p.sourceFiles instanceof Array);
+            expect(p.sourceFiles).to.be.an(Array);
         },
         'check if path is a dependency': function () {
-            assert.isObject(deps.path);
+            expect(deps.path).to.be.an('object');
         },
         TESTS: {
             'just testing': function () {
-                assert(true);
+                expect(true).to.be(true);
             }
         }
     });

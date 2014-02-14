@@ -35,6 +35,18 @@ module.exports = function(grunt) {
                     expect: true,
                     sinon: true
                 }
+            },
+            node: {
+                files: {
+                    sources: ['server/modules/**/*.js'],
+                    libs: ['module-loader-tdd'],
+                    tests: ['server/tests/**/*-test.js']
+                },
+                options: {
+                    node: true,
+                    runner: 'buster',
+                    expect: true
+                }
             }
         }
     });
