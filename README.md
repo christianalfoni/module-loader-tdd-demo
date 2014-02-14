@@ -11,8 +11,5 @@ A demo for the module-loader-tdd project
 ### Normal
 Run: **node server** and a localhost:3000 willl be available
 
-### Test server
-Go to folder: *server/tests* and run **buster-test**
-
-### Test client
-Go to folder: *client/tests* and run **buster-static**, go to localhost:8282
+###
+Have a look at [https://github.com/christianalfoni/grunt-tdd](https://github.com/christianalfoni/grunt-tdd)
