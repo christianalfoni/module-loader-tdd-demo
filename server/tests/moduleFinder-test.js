@@ -1,4 +1,4 @@
-modules.test('./../modules/moduleFinder', function (moduleFinder, p, deps) {
+modules.test('./../modules/moduleFinder', function (moduleFinder, p, deps, resource) {
 
     module.exports = buster.testCase('Just a test', {
         'has findAll function': function () {

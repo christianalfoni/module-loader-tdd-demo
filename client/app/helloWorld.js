@@ -1,4 +1,4 @@
-modules.create('helloWorld', function (require, p) {
+modules.create('helloWorld', function (require, p, resource) {
     var logger = require('logger'),
         template = require.template('message');
 
@@ -8,7 +8,9 @@ modules.create('helloWorld', function (require, p) {
 
     return {
         hello: function () {
-            var message = p.sayToWorld('Hello');
+            var  user = resource.fetch('user'),
+                message = user.name + ' says: ' + p.sayToWorld('Hello');
+
             logger.log(message);
             return template({message: message});
         }
