@@ -15,6 +15,7 @@ Run: **node server** and a localhost:3000 willl be available
 Have a look at [https://github.com/christianalfoni/grunt-tdd](https://github.com/christianalfoni/grunt-tdd)
 
 Browser tests, run: **grunt tdd:browser** and go to localhost:3001
+
 Node tests, run: **grunt tdd:node** and go to localhost:3001
 
 Use flag --runAll to test directly in terminal. e.g. **grunt tdd:browser --runAll**
